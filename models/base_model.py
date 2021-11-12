@@ -7,11 +7,11 @@ import models
 
 
 class BaseModel:
-    """ BaseModel for all higher order classes """
+    """BaseModel for all higher order classes"""
 
     def __init__(self, *args, **kwargs):
         """
-            class constructor
+        class constructor
         """
         self.tformat = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
@@ -28,7 +28,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """ returns a string represantation of class BaseModel """
+        """returns a string represantation of class BaseModel"""
         clsname = self.__class__.__name__
         return "[{}] ({}) {}".format(clsname, self.id, self.__dict__)
 
@@ -37,9 +37,9 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """ Returns a dict of the BaseModel instance"""
+        """Returns a dict of the BaseModel instance"""
         obj = self.__dict__.copy()
-        obj['created_at'] = self.created_at.isoformat()
-        obj['updated_at'] = self.updated_at.isoformat()
-        obj['__class__'] = self.__class__.__name__
+        obj["created_at"] = self.created_at.isoformat()
+        obj["updated_at"] = self.updated_at.isoformat()
+        obj["__class__"] = self.__class__.__name__
         return obj
