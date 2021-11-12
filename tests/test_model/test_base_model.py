@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+""" unittest for our base model class """
+
+import models
+from models.base_model import BaseModel
+import os
+from datetime import datetime
+import unittest
+from time import sleep
+
+class BASEMODELInstantiationTest(unittest.TestCase):
+    """ Test cases for instantiation """
+
+    def test_empty_args(self):
+        self.assertEqual(BaseModel, type(BaseModel()))
+
+    def test_new_obj_is_in_storage_obj(self):
+        self.assertIn(BaseModel(), models.storage.all().values())
+    def test_id_is_public(self):
+        self.assertEqual(str, type(BaseModel().id))
+    def test_created_at_is_public(self):
+        self.assertEqual(datetime, type(BaseModel().created_at))
+    def test_updated_at_is_public(self):
+        self.assertEqual(datetime, type(BaseModel().updated_at))
+    def test_two_obj_have_diff_id(self):
+        bm1 = BaseModel()
+        bm2 = BaseModel()
+        self.assertNotEqual(bm1.id, bm2.id)
+    def test_two_obj_have_diff_created_at(self):
+        bm1 = BaseModel()
+        sleep(0.06)
+        bm2 = BaseModel()
+
+        self.assertLess(bm1.created_at, bm2.created_at)
+
+    def test_two_obj_have_diff_updated_at(self):
+        bm1 = BaseModel()
+        sleep(0.06)
+        bm2 = BaseModel()
+
+        self.assertLess(bm1.updated_at, bm2.updated_at)
+    def test_str_representation(self):
+        dt = datetime.today()
+        dt_repr = repr(dt)
+
+        bm = BaseModel()
+        bm.id = "123"
+        bm.created_at = bm.updated_at = dt_repr
+        bm_str = bm.__str__()
+        self.assertIn("[BaseModel] (123)", bm_str)
+        self.assertIn("'created_at': '{}'".format(dt_repr), bm_str)
+        self.assertIn("'updated_at': '{}'".format(dt_repr), bm_str)
+        self.assertIn("'id': '123'", bm_str)
+    def test_instantiation_with_kwargs(self):
+        dt = datetime.today()
+        dt_str = dt.isoformat()
+        bm = BaseModel(id="123", created_at=dt_str, updated_at=dt_str)
+        self.assertEqual(bm.id, "123")
+        self.assertEqual(bm.created_at, dt)
+        self.assertEqual(bm.updated_at, dt)
+
+    def test_args_is_unused(self):
+        bm = BaseModel(None)
+        self.assertNotIn(None, bm.__dict__.values())
+
+    def test_none_kwarg_args(self):
+        with self.assertRaises(TypeError):
+            bm = BaseModel(id=None, created_at=None, updated_at=None)
+
+    def test_instance_with_arg_and_kwarg(self):
+        dt = datetime.today()
+        dt_str = dt.isoformat()
+        bm = BaseModel("12", id="123", created_at=dt_str, updated_at=dt_str)
+        self.assertEqual(bm.id, "123")
+        self.assertEqual(bm.created_at, dt)
+        self.assertEqual(bm.updated_at, dt)
+        self.assertNotIn("12", bm.__dict__.values())
+
+if __name__ == "__main__":
+    unittest.main()
