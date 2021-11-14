@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
         super().__init__(completekey, stdin, stdout)
 
     def do_quit(self, line):
-        """leave the current program"""
+        """Quit command to exit the program"""
         # Cmd.emptyline() == True
         return True
 
