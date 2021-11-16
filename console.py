@@ -2,6 +2,12 @@
 """ the programm is the entry point of the command interpreter """
 
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.user import User
+from models.state import State
+from models.review import Review
 from models import storage
 from shlex import split
 import cmd
