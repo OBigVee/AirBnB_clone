@@ -39,7 +39,9 @@ class BaseModel:
     def to_dict(self):
         """ Returns a dict of the BaseModel instance"""
         obj = self.__dict__.copy()
-        obj['created_at'] = self.created_at.isoformat()
-        obj['updated_at'] = self.updated_at.isoformat()
+        if (type(self.updated_at) != str):
+            obj['updated_at'] = self.updated_at.isoformat()
+        if (type(self.created_at) != str):
+            obj['created_at'] = self.created_at.isoformat()
         obj['__class__'] = self.__class__.__name__
         return obj

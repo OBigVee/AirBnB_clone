@@ -85,56 +85,55 @@ class BASEMODELInstantiationTest(unittest.TestCase):
         self.assertNotIn("12", bm.__dict__.values())
 
 
-# class TESTSAVE(unittest.TestCase):
+class TESTSAVE(unittest.TestCase):
 
-#     @classmethod
-#     def setUp(self):
-#         try:
-#             os.rename("file.json","tmp")
-#         except IOError:
-#             pass
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json","tmp")
+        except IOError:
+            pass
 
-#     @classmethod
-#     def tearDown(self):
-#         try:
-#             os.remove("file.json")
-#         except IOError:
-#             pass
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
 
-#         try:
-#             os.rename("tmp", "file.json")
-#         except IOError:
-#             pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
 
-#     def test_one_save(self):
-#         bm = BaseModel()
-#         sleep(0.06)
-#         first_updated_at = bm.updated_at
-#         print(models.storage.save())
-#         bm.save()
-#         self.assertLess(first_updated_at, bm.updated_at)
-#     def test_two_save(self):
-#         bm = BaseModel()
-#         sleep(0.05)
-#         first_update_at = bm.updated_at
-#         bm.save()
-#         self.assertLess(first_update_at, bm.updated_at)
-#         second_updated_at = bm.updated_at
-#         sleep(0.06)
-#         bm.save()
-#         self.assertLess(second_updated_at, bm.updated_at)
+    def test_one_save(self):
+        bm = BaseModel()
+        sleep(0.06)
+        first_updated_at = bm.updated_at
+        bm.save()
+        self.assertLess(first_updated_at, bm.updated_at)
+    def test_two_save(self):
+        bm = BaseModel()
+        sleep(0.05)
+        first_update_at = bm.updated_at
+        bm.save()
+        second_updated_at = bm.updated_at
+        self.assertLess(first_update_at, second_updated_at)
+        sleep(0.06)
+        bm.save()
+        self.assertLess(second_updated_at, bm.updated_at)
 
-#     def test_save_with_arg(self):
-#         bm = BaseModel(None)
-#         with self.assertRaises(TypeError):
-#             bm.save(None)
+    def test_save_with_arg(self):
+        bm = BaseModel()
+        with self.assertRaises(TypeError):
+            bm.save(None)
 
-#     def test_save_updates_file(self):
-#         bm = BaseModel()
-#         bm.save()
-#         bmid = "BaseModel."+bm.id
-#         with open("file.json") as f:
-#             self.assertIn(bmid, f.read())
+    def test_save_updates_file(self):
+        bm = BaseModel()
+        bm.save()
+        bmid = "BaseModel."+bm.id
+        with open("file.json") as f:
+            self.assertIn(bmid, f.read())
 
 
 class TEST_To_Dict(unittest.TestCase):
