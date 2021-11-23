@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #484848;
+  font-size: 14px;
+  position: relative;
+  height: 100%;
+  min-height: 100vh;
+  font-family: Circular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+}
