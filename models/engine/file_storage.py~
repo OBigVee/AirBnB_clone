@@ -4,7 +4,6 @@
 import json
 from models.base_model import BaseModel
 
-
 class FileStorage:
     """ Performs serialization and deserialization functionarity.
 
@@ -14,11 +13,11 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = dict({})
-
+    
     def all(self):
         """ returns all objects """
         return FileStorage.__objects
-
+    
     def new(self, obj):
         """ sets __objects with new obj """
         ocname = obj.__class__.__name__
@@ -30,6 +29,7 @@ class FileStorage:
         ob_dict = {obj: odict[obj].to_dict() for obj in odict.keys()}
         with open(FileStorage.__file_path, "w") as f:
             json.dump(ob_dict, f)
+
 
     def reload(self):
         try:

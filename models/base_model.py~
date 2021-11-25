@@ -8,7 +8,7 @@ import models
 
 class BaseModel:
     """ BaseModel for all higher order classes """
-
+    
     def __init__(self, *args, **kwargs):
         """
             class constructor
@@ -29,8 +29,7 @@ class BaseModel:
 
     def __str__(self):
         """ returns a string represantation of class BaseModel """
-        clsname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clsname, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         self.updated_at = datetime.now()
