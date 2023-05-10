@@ -1,11 +1,10 @@
-# AirBnB console
+###### AirBnB console
+a command line application   
+![img](img/arch.png)
+### Description of the command interpreter
 
-# Description  of AirBnB Console  
+### how to start it?  
 
-# Description of the command interpreter
+### how to use it?  
 
-## how to start it  
-
-## how to use it  
-
-## examples
+### examples
