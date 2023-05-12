@@ -25,7 +25,8 @@ class Test_BaseModel(unittest.TestCase):
         """test for __str__ method """
         base = BaseModel()
         str_output = "[{}] ({}) {}".format(base.__class__.__name__,
-                base.id, self.__dict__)
+                base.id, base.__dict__)
+        self.maxDiff = None
         self.assertEqual(base.__str__(), str_output)
 
         
@@ -41,5 +42,5 @@ class Test_BaseModel(unittest.TestCase):
         base = BaseModel()
         model_json = base.to_dict()
         base2 = BaseModel(**model_json)
-        self.assertEqual(type(base2.created_at), datetime)
-        self.assertEqaul(type(base2.updated_at), datetime)
+        self.assertEqual(type(base.created_at), datetime)
+        self.assertEqual(type(base.updated_at), datetime)
