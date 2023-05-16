@@ -7,7 +7,7 @@ import json
 
 class FileStorage:
 
-    """private class attributes """
+    """Private class attributes """
     __file_path = "file.json"
     __objects = {}
 
