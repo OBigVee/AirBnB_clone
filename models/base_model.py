@@ -3,17 +3,16 @@
 
 import uuid
 from datetime import datetime
-from models import storage 
+from models import storage
+
 
 class BaseModel:
-    
     def __init__(self, *args, **kwargs):
-        #print("__Dict__ info here\n{},\n end of __dict__ info\n",kwargs.items())
         if kwargs:
             kwargs.pop("__class__", None)
-            for k,v in kwargs.items():
+            for k, v in kwargs.items():
                 setattr(self, k, v)
-            if "created_at" in  kwargs:
+            if "created_at" in kwargs:
                 value = kwargs["created_at"]
                 created_at = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 setattr(self, "created_at", created_at)
@@ -31,11 +30,11 @@ class BaseModel:
 
     def save(self):
         """updates the public instance attribute
-            updated_at with the current datetime
+        updated_at with the current datetime
         """
         self.updated_at = datetime.now()
         storage.save()
-    
+
     def to_dict(self):
         """returns a dictionary containing all keys/values of
         __dict__ of instance
@@ -47,4 +46,5 @@ class BaseModel:
         return d_dict
 
     def __str__(self):
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
