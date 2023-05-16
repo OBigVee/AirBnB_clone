@@ -1,10 +1,13 @@
 #!usr/bin/env python3
-""" storage class """
+""" storage class serializes instances to a JSON file
+    and deserializes JSON file to instances
+"""
 
 import json
 
 class FileStorage:
 
+    """private class attributes """
     __file_path = "file.json"
     __objects = {}
 
