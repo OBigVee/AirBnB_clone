@@ -1,5 +1,6 @@
 .filters {
-    color: white;
+    background-color: #ffffff;
+
     height: 70px;
     width: 100%;
     border: 1px solid #DDDDDD;
@@ -33,7 +34,7 @@
     position: relative;
     line-height: 15px;
     padding-left: 4%;
-    color: black;
+    /*color: black;*/
 }
 
 .locations {
@@ -66,8 +67,8 @@
 }
 
 .popover {
-    color: #FAFAFA;
-    border: 1px solid #DDDDDD;
+    background-color: #fafafa;
+    border: #DDDDDD 1px solid;
     border-radius: 4px;
     width: 100%;
     padding-bottom: 35px;
@@ -89,10 +90,13 @@
 
 .filters.locations ul ul {
     margin-top: -10px;
+
 }
 
 .filters .amenities ul {
-    padding-top: 10px;
+    padding-top: 15px;
+
+
 }
 
 .locations:hover .popover, .amenities:hover .popover {
