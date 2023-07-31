@@ -52,7 +52,7 @@ class FileStorage:
                 FileStorage.__objects = {}
                 for k, v in obj_f.items():
                     _class = v["__class__"]
-                    _obj = eval("{}({})".format(_class, "**v"))
+                    _obj = eval("{}(**v)".format(_class))
                     self.new(_obj)
         except FileNotFoundError:
             pass
