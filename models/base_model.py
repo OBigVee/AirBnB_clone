@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ BaseModel class"""
-
 import uuid
 from datetime import datetime
 from models import storage
