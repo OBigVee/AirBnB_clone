@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-""" The entry stage of the progam through a cli tool
+"""The entry stage of the program through a cli tool
 """
 
 import cmd, sys
 from models.base_model import BaseModel
+from models.amenity import Amenity
 
 class HBNBCommand(cmd.Cmd):
     #intro = "Welcome to the hbnb shell. Type help or ? to list commands.\n"

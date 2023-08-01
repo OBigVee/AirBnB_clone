@@ -6,6 +6,10 @@ from models import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
+          self.id = str(uuid.uuid4())
+          self.created_at = datetime.now()
+          self.updated_at = self.created_at
+          
           if kwargs:
             kwargs.pop("__class__", None)
             for k, v in kwargs.items():
@@ -19,11 +23,12 @@ class BaseModel:
                 value = kwargs["updated_at"]
                 updated_at = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 setattr(self, "updated_at", updated_at)
-            else:
-                self.id = str(uuid.uuid4())
-                self.created_at = datetime.now()
-                self.updated_at = created_at
-                storage.new(self)
+            
+            storage.new(self)
+            # else:
+            #     self.created_at = datetime.now()
+            #     self.updated_at = created_at
+            #     storage.new(self)
         #if len(kwargs) != 0:
         #     for k,v in kwargs.items():
         #         if k == "__class__":
