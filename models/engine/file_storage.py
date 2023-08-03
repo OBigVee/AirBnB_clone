@@ -17,7 +17,7 @@ class FileStorage:
 
     def all(self):
         """returns dictionary objects"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """sets in __objects the obj with k
@@ -27,15 +27,20 @@ class FileStorage:
 
         if obj and isinstance(obj, BaseModel):
             k = "{}.{}".format(obj.__class__.__name__, obj.id)
-            self.__objects[k] = obj
+            FileStorage.__objects[k] = obj
 
     def save(self):
         """save method serializes __objects to
         the JSON file path: __file_path
         """
-        obj_dict = {k: v.to_dict() for k, v in self.__objects.items()}
-        with open(self.__file_path, "w", encoding="utf-8") as file_obj:
+        obj_dict = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as file_obj:
             json.dump(obj_dict, file_obj)
+        # with open(FileStorage.__file_path, "w", encoding="utf-8") as fi:
+        #     objs = {}
+        #     for key, obj in FileStorage.__objects.items():
+        #         objs.update({key: obj.to_dict()})
+        #     json.dump(objs, fi)
 
     def reload(self):
         """deserializes the json file to __objects
@@ -52,7 +57,8 @@ class FileStorage:
                 FileStorage.__objects = {}
                 for k, v in obj_f.items():
                     _class = v["__class__"]
-                    _obj = eval("{}(**v)".format(_class))
+                    # from models.amenity import Amenity
+                    _obj = eval("{}()".format(_class, **v))
                     self.new(_obj)
         except FileNotFoundError:
             pass
